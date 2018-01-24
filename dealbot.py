@@ -1,3 +1,9 @@
+
+
+import smptlib
+#attempt to create SMTP server to email me the free games.
+
+
 import praw
 import time
 from datetime import datetime
