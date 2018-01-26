@@ -1,18 +1,11 @@
-
-
-#import smtplib
-#attempt to create SMTP server to email me the free games.
-#s = smtplib.SMTP(host='your_host_address_here', port=your_port_here)
-#s.starttls()
-#s.login(MY_ADDRESS, PASSWORD)
-
+import os, sys #import from parent directory
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import secure
 import praw
 import time
 from datetime import datetime
 
-import os, sys #import from parent directory
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import secure
+
 #Name misleading.
 #Literally just a python file in the parent directory
 #named "secure.py" with four plaintext variables.
