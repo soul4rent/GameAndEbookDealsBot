@@ -54,7 +54,11 @@ def GimmeGames():
                     retString += str(submission.url) #link to free thing
                     retString += "\n"
                     #print("=========================\n")
+
+    time.sleep(3) #prevent API abuse
     return retString
+
+    
 
 #print(GimmeGames())
 #testing out function

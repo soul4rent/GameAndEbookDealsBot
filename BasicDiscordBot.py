@@ -37,9 +37,8 @@ async def on_ready():
 # This is a basic example of a call and response command. You tell it do "this" and it does it.
 @client.command()
 async def gimmegames(*args):
-
 	#await client.say(":ping_pong: Pong!)
-	await client.say(dealBotFunctions.GimmeGames())
+        await client.say(dealBotFunctions.GimmeGames())
 	#await asyncio.sleep(3)
 	#await client.say(":warning: This bot was created by **Habchy#1665**, it seems that you have not modified it yet. Go edit the file and try it out!")
 	
