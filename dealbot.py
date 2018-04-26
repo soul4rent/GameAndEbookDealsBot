@@ -6,12 +6,20 @@ import time
 from datetime import datetime
 
 
-#Name misleading.
-#Literally just a python file in the parent directory
-#named "secure.py" with four plaintext variables.
-#On the local machine only, referenced by this script.
-#It's not secure, so make a throwaway account to use.
+def phraseTrigger(phrase): #loops through trigger words and returns true if the phrase contains a word
+    return True
+    
 
+def phraseFilter(phrase):
+    return True
+
+
+
+#words that trigger positive
+trigger_words = ["free", "100%"]
+
+#words that do not trigger response
+banned_words = ["free shipping", "free weekend", "free this weekend", "free to play"]
 
 freegames = [] #make a string list so not spammed with free games
 
@@ -41,6 +49,8 @@ while True: #run forever until forced stop. Doesn't matter if user friendly. Onl
         if (score > 20 and subreddit == "gamedeals") or (score > 3 and subreddit == "androidgamedeals") or (score > 3 and subreddit == "freegamesonandroid") or (subreddit == "ebookdeals"): 
             #trying to eliminate false positives (todo: use regex if list of keywords gets too long)
             if (title.find('free') != -1 or title.find('100%') != -1) and (title.find('free shipping') == -1) and (title.find('free weekend') == -1) and (title.find('free to play') == -1):
+                #too many words to keep track of. Currently making a list and having it check through them. If list gets too long, switching to regex or database
+
                 if freegames.count(title) == 0: #game not already in the list of free games
                     freegames.append(title)
                     print("=========================")
