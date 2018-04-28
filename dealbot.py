@@ -22,7 +22,7 @@ def phraseFilter(phrase, t_words, f_words): #loops through trigger words and ret
 trigger_words = ["free", "100%"]
 
 #words that trigger filter
-filter_words = ["free shipping", "free weekend", "free this weekend", "free to play"]
+filter_words = ["free shipping", "free weekend", "free to play"]
 
 freegames = [] #make a string list of already printed games so not spammed with free games (script runs continuously)
 
