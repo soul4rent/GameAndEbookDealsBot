@@ -6,7 +6,26 @@ import time
 from datetime import datetime
 
 
+def phraseFilter(phrase, t_words, f_words): #loops through trigger words and returns true if the phrase contains a word, but not a filter word
+    for x in f_words: #filter out duds
+        if x.lower() in phrase:
+            return False
+        
+    for y in t_words: #add successes
+        if y.lower() in phrase:
+            return True
+        else:
+            return False
+
+
+
 def GimmeGames():
+    
+    #words that trigger positive
+    trigger_words = ["free", "100%"]
+
+    #words that trigger filter
+    filter_words = ["free shipping", "free weekend", "free to play"]
 
     retString = "" #Giant String with free games in it
     
@@ -30,9 +49,7 @@ def GimmeGames():
         #if the item isn't terrible
         if (score > 20 and subreddit == "gamedeals") or (score > 3 and subreddit == "androidgamedeals") or (score > 3 and subreddit == "freegamesonandroid") or (subreddit == "ebookdeals"): 
             #trying to eliminate false positives (todo: use regex if list of keywords gets too long)
-            if (title.find('free') != -1 or title.find('100%') != -1) and (title.find('free shipping') == -1) and (title.find('free weekend') == -1) and (title.find('free to play') == -1):
-
-                    #prints for debug
+            if phraseFilter(title, trigger_words, filter_words):
 
                     #print("=========================")
                     retString += "============ \n"
@@ -55,10 +72,5 @@ def GimmeGames():
                     retString += "\n"
                     #print("=========================\n")
 
-    time.sleep(3) #prevent API abuse
+    time.sleep(3) #prevent Reddit API abuse
     return retString
-
-    
-
-#print(GimmeGames())
-#testing out function

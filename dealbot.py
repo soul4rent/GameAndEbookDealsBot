@@ -5,7 +5,7 @@ import praw
 import time
 from datetime import datetime
 
-#IN PROGRESS
+
 def phraseFilter(phrase, t_words, f_words): #loops through trigger words and returns true if the phrase contains a word, but not a filter word
     for x in f_words: #filter out duds
         if x.lower() in phrase:
@@ -41,13 +41,13 @@ while True: #run forever until forced stop. Doesn't matter if user friendly. Onl
 
     for submission in subreddit.hot(limit=50):
 
-        title = submission.title.lower() #sets the title to lower case to make string manipulation more friendly
+        title = submission.title.lower()
+        #sets the title to lower case to make string manipulation more friendly
 
-        #help make code look cleaner
         subreddit = str(submission.subreddit).lower()
         score = submission.score
         
-        #if the item isn't terrible
+        #if the item isn't terrible (TODO: update to dictionary)
         if (score > 20 and subreddit == "gamedeals") or (score > 3 and subreddit == "androidgamedeals") or (score > 3 and subreddit == "freegamesonandroid") or (subreddit == "ebookdeals"): 
             #Currently using a list and having it check through them. If list gets too long, switching to regex or database
             if phraseFilter(title, trigger_words, filter_words):
@@ -61,4 +61,5 @@ while True: #run forever until forced stop. Doesn't matter if user friendly. Onl
                     print("Post created ", datetime.fromtimestamp(submission.created)) #convert UTC time when post created to something readable
                     print("=========================\n")
 
-    time.sleep(60) #sleep for 60 seconds
+    time.sleep(60)
+    #Sleep to prevent Reddit Timeouts. Program keeps getting games as it find them.
