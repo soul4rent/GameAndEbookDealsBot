@@ -8,14 +8,14 @@ from datetime import datetime
 #IN PROGRESS
 def phraseFilter(phrase, t_words, f_words): #loops through trigger words and returns true if the phrase contains a word, but not a filter word
     for x in f_words: #filter out duds
-        if x in phrase:
+        if x.lower() in phrase:
+            return False
+        
+    for y in t_words: #add successes
+        if y.lower() in phrase:
             return True
         else:
-            for y in t_words: #add successes
-                if y in phrase:
-                    return True
-                else:
-                    return False
+            return False
         
     
 #words that trigger positive
