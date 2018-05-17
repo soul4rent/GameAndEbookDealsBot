@@ -22,7 +22,7 @@ https://praw.readthedocs.io/en/latest/
 4) You need to get bot tokens from Discord.
 
 
-#licenses
+# Licenses
 
 This project is under the APACHE 2.0 license, found here: https://www.apache.org/licenses/LICENSE-2.0
 However, ensure that your code is applicable under the licneses for discord.py and PRAW. I do not maintain those
