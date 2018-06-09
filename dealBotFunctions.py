@@ -1,9 +1,50 @@
 import os, sys #import from parent directory
+#TODO: Make things easier and just change it to a file with a git ignore.
+#I made this project before I knew what it was, and this was my workaround
+#for not showing everyone in the world my passwords for my bot.
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import secure
 import praw
 import time
+from threading import Thread
 from datetime import datetime
+
+
+#initialized as globals. Lets see if it works.
+#words that trigger positive
+trigger_words = ["free", "100%"]
+
+#words that trigger filter
+filter_words = ["free shipping", "free weekend", "free to play"]
+
+
+initialized = False #see if bot is currently initialized to prevent abuse
+
+#setting up bot as global.
+bot = praw.Reddit(user_agent='GameDealBot v0.1',
+            client_id=secure.client_id,
+            client_secret=secure.client_secret,
+            username=secure.user,
+            password=secure.password)
+
+
+def preventTimeouts():
+    while True:
+            time.sleep(60) #relogin every 60 seconds. Don't know if there is a better way.
+            bot = praw.Reddit(user_agent='GameDealBot v0.1',
+                client_id=secure.client_id,
+                client_secret=secure.client_secret,
+                username=secure.user,
+                password=secure.password)
+    
+
+def init(): #an attempt to prevent timeouts through the power of threading
+    global initialized
+    if (not initialized):
+        print("initialized!")
+        initialized = True
+        t1 = Thread(target=preventTimeouts, args=[])
+        t1.start()
 
 
 def phraseFilter(phrase, t_words, f_words): #loops through trigger words and returns true if the phrase contains a word, but not a filter word
@@ -20,23 +61,10 @@ def phraseFilter(phrase, t_words, f_words): #loops through trigger words and ret
 
 
 def GimmeGames():
-    
-    #words that trigger positive
-    trigger_words = ["free", "100%"]
-
-    #words that trigger filter
-    filter_words = ["free shipping", "free weekend", "free to play"]
 
     retString = "" #Giant String with free games in it
-    
-    bot = praw.Reddit(user_agent='GameDealBot v0.1',
-                  client_id=secure.client_id,
-                  client_secret=secure.client_secret,
-                  username=secure.user,
-                  password=secure.password)
 
     subreddit = bot.subreddit("AndroidGameDeals+GameDeals+ebookdeals+FreeGamesOnAndroid")
-
 
     for submission in subreddit.hot(limit=50):
 
