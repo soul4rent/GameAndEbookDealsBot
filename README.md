@@ -10,16 +10,17 @@ slow development.
 For 2 and 3, you might need to use the pip command line. For windows, I recommend GitBash, and for linux/unix, its most likely built in.
 If it isn't working, make sure that PIP is installed to the path of your command line.
 
-2) You need to install PRAW at,
-http://discordpy.readthedocs.io/en/latest/api.html
-
 
 IF YOU WANT TO IMPLEMENT THE DISCORD BOT:
 
-3) You need to install discord.py at,
-https://praw.readthedocs.io/en/latest/
+2) You need to install discord.py and praw, usually by using PIP:
 
-4) You need to get bot tokens from Discord.
+pip install discord.py
+pip install praw
+
+be sure to check your python versions. You might need to use pip3 if it initially doesn't work.
+
+3) You need to get bot tokens from Discord.
 
 
 # Licenses

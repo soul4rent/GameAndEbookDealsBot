@@ -1,11 +1,3 @@
-import os, sys #import from parent directory
-#possible TODO: Make things easier and just change it to a file with a git ignore.
-#I made this project before I knew what it was, and this was my workaround
-#for not showing everyone in the world my passwords for my bot.
-#UPDATE: definately change... later
-
-#TODO: Didn't work initially on my Raspberry Pi, so need to change.
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import secure
 import praw
 import time
