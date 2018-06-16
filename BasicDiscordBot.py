@@ -1,9 +1,6 @@
 #Modification of Habchy's Basic Discord Bot
 
-import os, sys #import from parent directory
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import secure
-
 import dealBotFunctions
 
 # These are the dependecies. The bot depends on these to function, hence the name. Please do not change these unless your adding to them, because they can break the bot.
@@ -37,9 +34,12 @@ async def on_ready():
 # This is a basic example of a call and response command. You tell it do "this" and it does it.
 @client.command()
 async def gimmegames(*args):
-        await client.say("Searching for games... (This may take a few seconds)")
-        await client.say(dealBotFunctions.GimmeGames())
-	#await client.say(":warning: This bot was created by **Habchy#1665**, it seems that you have not modified it yet. Go edit the file and try it out!")
+        try:
+                await client.say("Searching for games... (This may take a few seconds)")
+                await client.say(dealBotFunctions.GimmeGames())
+                #await client.say(":warning: This bot was created by **Habchy#1665**, it seems that you have not modified it yet. Go edit the file and try it out!")
+        except:
+                await client.say("Command failed, please try again.")
 
 @client.command()
 async def ping(*args):
