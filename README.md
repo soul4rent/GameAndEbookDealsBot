@@ -7,7 +7,7 @@ slow development.
 # Prerequisistes
 1) You need python version 3.6
 
-For 2 and 3, you might need to use the pip command line. For windows, I recommend GitBash, and for linux/unix, its most likely built in.
+For 2, you might need to use the pip command line. For windows, I recommend GitBash, and for linux/unix, its most likely built in.
 If it isn't working, make sure that PIP is installed to the path of your command line.
 
 
