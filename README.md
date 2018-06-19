@@ -20,7 +20,7 @@ pip install praw
 
 be sure to check your python versions. You might need to use pip3 if it initially doesn't work.
 
-3) You need to get bot tokens from Discord.
+3) You need to get bot tokens from Reddit and Discord.
 
 
 # Licenses
@@ -28,3 +28,7 @@ be sure to check your python versions. You might need to use pip3 if it initiall
 This project is under the APACHE 2.0 license, found here: https://www.apache.org/licenses/LICENSE-2.0
 However, ensure that your code is applicable under the licneses for discord.py and PRAW. I do not maintain those
 libraries, and thus, I do not know if/when their licenses will change.
+
+# Authors
+
+All code not using 3rd party libraries was authored by Kyle Wadsworth
