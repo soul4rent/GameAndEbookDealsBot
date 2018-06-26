@@ -108,7 +108,7 @@ def phraseFilter(phrase, t_words, f_words): #loops through trigger words and ret
 
 def GimmeGames():
     while True:
-        if data_lock == True:
+        if data_lock:
             time.sleep(.1)
         else:
             s = retString
