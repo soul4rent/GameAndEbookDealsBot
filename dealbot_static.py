@@ -1,10 +1,10 @@
 import os, sys #import from parent directory
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import smtplib
 import secure
 import praw
 import time
 from datetime import datetime
-
 
 #words that trigger positive
 trigger_words = ["free", "100%"]
@@ -24,7 +24,8 @@ def phraseFilter(phrase, t_words, f_words): #loops through trigger words and ret
         else:
             return False
 
-
+        
+#prints out free games
 def prettyPrintGames(freegames):
     for submission in freegames:
         print("=========================")
@@ -32,8 +33,33 @@ def prettyPrintGames(freegames):
         print("Score: ", submission.score)
         print(submission.subreddit)
         print("Post created ", datetime.fromtimestamp(submission.created)) #convert UTC time when post created to something readable
+        print("Url: ", submission.url)
         print("=========================\n")
-        
+
+
+#takes list of free games, and returns a pretty string
+def prettyFormatGames(freegames):
+    returnString = ""
+    for submission in freegames:
+        returnString=returnString+ "=========================\n"
+        returnString=returnString+ "Title: " + str(submission.title) + "\n"
+        returnString=returnString+ "Score: " + str(submission.score) + "\n"
+        returnString=returnString+ str(submission.subreddit) + "\n"
+        returnString=returnString+ "Post created " + str(datetime.fromtimestamp(submission.created)) + "\n"
+        returnString=returnString+ "URL: " + str(submission.url) + "\n"
+        returnString=returnString+ "=========================\n"
+    return returnString
+
+
+#sets up a temp SMTP server and sends an email.
+def simpleSmtpSendGames(smtpAddress, email, email_password, targetEmail, freegames):
+    smtpClient=smtplib.SMTP(smtpAddress, 587)
+    smtpClient.ehlo()
+    smtpClient.starttls()
+    smtpClient.login(email, email_password)
+    smtpClient.sendmail(email, targetEmail, "Subject: [Automated] Games Scraped from Reddit! \n"
+                        +prettyFormatGames(freegames))
+    smtpClient.quit()
 
 def gimmeGames(gamedeals_min, android_gamedeals_min, free_games_android_min, ebook_deals_min):
     bot = praw.Reddit(user_agent='GameDealBot v0.1',
@@ -67,5 +93,9 @@ def gimmeGames(gamedeals_min, android_gamedeals_min, free_games_android_min, ebo
                     
 
 if __name__ == '__main__': #example use
-    prettyPrintGames(gimmeGames(20, 3, 3, 1))
+    gameList = gimmeGames(20, 3, 3, 1)
+    prettyPrintGames(gameList)
+
+    #exampleSmtpSendGames
+    #simpleSmtpSendGames('smtp.gmail.com', secure.email, secure.email_pass, secure.email, gameList)
     
